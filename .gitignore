@@ -58,3 +58,5 @@
 **/tarballs
 /build/android-toolchain*
 /contrib/android-*
+
+/contrib/install-win32/
