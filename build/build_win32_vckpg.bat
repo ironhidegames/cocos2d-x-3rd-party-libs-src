@@ -8,6 +8,7 @@ REM
 
 SET START_DIR="%cd%"
 SET INSTALL_DIR=%START_DIR%\..\contrib\install-win32
+set PATCH_DIR=%START_DIR%\..\contrib\win32-vcpkg-patches
 
 REM ------------------------------------------------------------
 
@@ -31,8 +32,10 @@ SET EXPORT_DIR=%1
 SET EXPORT_NAME=win32-vcpkg
 
 echo Install dir: %INSTALL_DIR%
-echo Export dir:  %EXPORT_DIR%\%EXPORT_NAME%
+echo Export  dir: %EXPORT_DIR%\%EXPORT_NAME%
+echo Patches dir: %PATCH_DIR%
 
+REM Download and install vcpkg
 pushd %INSTALL_DIR%
 
 if not exist vcpkg (
@@ -43,6 +46,7 @@ if not exist vcpkg (
    popd
 )
 
+REM Export vcpkg into -bin repo
 pushd vcpkg
 
 FOR %%A IN (x86 x64) DO (
@@ -54,6 +58,13 @@ FOR %%A IN (x86 x64) DO (
 )
 popd
 popd
+
+REM Apply patches
+pushd %EXPORT_DIR%
+git apply %PATCH_DIR%\x86-mpg123-ssize.patch
+git apply %PATCH_DIR%\x86-uv-ssize.patch
+popd
+
 goto:eof
 
 :error_exit

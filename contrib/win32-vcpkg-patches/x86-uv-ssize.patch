@@ -1,0 +1,13 @@
+diff --git a/win32-vcpkg.x86/installed/x86-windows/include/uv/win.h b/win32-vcpkg.x86/installed/x86-windows/include/uv/win.h
+index 9793eee..f066d57 100644
+--- a/win32-vcpkg.x86/installed/x86-windows/include/uv/win.h
++++ b/win32-vcpkg.x86/installed/x86-windows/include/uv/win.h
+@@ -23,7 +23,7 @@
+ # define _WIN32_WINNT   0x0600
+ #endif
+
+-#if !defined(_SSIZE_T_) && !defined(_SSIZE_T_DEFINED)
++#if !defined(_SSIZE_T_) && !defined(_SSIZE_T_DEFINED) && !defined(__SSIZE_T)
+ typedef intptr_t ssize_t;
+ # define SSIZE_MAX INTPTR_MAX
+ # define _SSIZE_T_
